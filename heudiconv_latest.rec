@@ -1,1 +1,20 @@
+# FMRIPREP from poldracklab
 
+BootStrap: docker
+From: docker://nipy/heudiconv:0.5.4
+
+%runscript
+    exec /usr/local/miniconda/bin/heudiconv "$@"
+
+%environment
+
+%post
+    #------------------------------------------------------------------------------
+    # Create local binding points for our ICS-ACI
+    #------------------------------------------------------------------------------
+    mkdir -p /storage/home
+    mkdir -p /storage/work
+    mkdir -p /gpfs/scratch
+    mkdir -p /gpfs/group
+    mkdir -p /var/spool/torque
+#
